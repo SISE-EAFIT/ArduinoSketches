@@ -8,7 +8,7 @@ Funte del Codigo:  https://communities.intel.com/thread/56165
 
 #define trigPin 3
 #define echoPin 2
-
+int val;
 void setup() {
      Serial.begin (9600);
      pinMode(trigPin, OUTPUT_FAST);
@@ -16,7 +16,7 @@ void setup() {
 }
  
 void loop() {
-     long duration, distance;
+     long duracion, distancia;
 
      digitalWrite(trigPin, LOW);
      delayMicroseconds(2);
@@ -24,13 +24,14 @@ void loop() {
      delayMicroseconds(10);
      digitalWrite(trigPin, LOW);
  
-     duration = pulseIn(echoPin, HIGH);
-     distance = (duration/2) / 29.1;
-     if (distance >= 100 || distance <= 0){
+     duracion = pulseIn(echoPin, HIGH);
+     distancia = (duracion/2) / 29.1;
+     if (distancia >= 100 || distancia <= 0){
           Serial.println("Fuera de Rango");
      }else {
-          Serial.print(Distancia);
-          Serial.println(" cm");
+          val = map(distancia, 0, 30, 0, 1024);
+          Serial.println(val);
+       //   Serial.println(val);
      }
      delay(500);
 }
